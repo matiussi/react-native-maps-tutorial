@@ -20,7 +20,7 @@ const CustomMarker = (
         latitude: latitude,
         longitude: longitude,
       }}
-      //Chamando a funcão getDirections() para obter as rotas
+      //Chamando a funcão para selecionar o marcador
       onPress={() => onPress(latitude, longitude)}
     >
       <View style={styles.markerWrapper}>
@@ -38,7 +38,8 @@ const CustomMarker = (
           {
             borderBottomColor: color || "#4285F4",
           }
-        ]}></View>
+        ]}>
+        </View>
       </View>
       {/* Caso queira customizar totalmente a aparência de um Callout através de seus filhos, atribua à ele a propriedade tooltip=true */}
       {/* <Callout  style={styles.callout}>
