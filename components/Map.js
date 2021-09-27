@@ -8,9 +8,9 @@ import Button from './Button';
 
 const Map = () => {
 
-   const APIKEY = "AIzaSyD_Uf7-gpYZuPGFJJ4D6neQs1h6S46zCd4";
+   const APIKEY = "SUA CHAVE API";
 
-   //Estado responsável por armazenar 
+   //Estado responsável por armazenar as informações da câmera do mapa
    const [camera, setCamera] = useState({
       center: {
          latitude: 0,
@@ -21,20 +21,21 @@ const Map = () => {
       altitude: 1000,
       zoom: 16,
    });
-    //Estado responsável por armazenar a posição selecionar a posição de destino e exibir o botão obter direções
+   //Estado responsável por armazenar a posição selecionar a posição de destino e exibir o botão obter direções
    const [selectedDestination, setSelectedDestination] = useState(null);
    //Estado responsável por armazenar as coordenadas de destino
    const [destinationLocation, setDestinationLocation] = useState(null);
+   //Estado responsável por checar quando a primeira renderização do mapa foi realizada
    const [mapReady, setMapReady] = useState(false);
    //Estado responsável por controlar quando a câmera deve ser centralizada entre duas coordenadas(posição atual e marcador de destino)
    const [shouldFitMarkers, setShouldFitMarkers] = useState(true);
    //Estado responsável por controlar quando a câmera deve seguir o usuário 
    const [followUserLocation, setFollowUserLocation] = useState(true);
-  
+
    //Definindo uma referência para o mapa para que possamos utilizar seus métodos
    const mapRef = useRef(null);
 
-
+   //Altura de largura da janela da aplicação
    const { width, height } = Dimensions.get('window');
 
    useEffect(() => {
@@ -47,25 +48,26 @@ const Map = () => {
          }
          try {
             /* A função abaixo realiza o monitoramento da posição atual do usuário de acordo com os parâmetros fornecidos
-               e retorna uma callback sempre que obtém a localização, a partir da callback iremos obter um contendo as coordenadas */
+               e retorna uma callback sempre que obtém a localização, a partir da callback iremos obter um objeto contendo as coordenadas */
             await watchPositionAsync({
                accuracy: Accuracy.Highest,
                timeInterval: 5000,
                distanceInterval: 10,
-            
+
             }, (loc) => {
-                  /*
-                     Setando o estado da câmera a partir do operador spread, pois desejamos manter as demais propriedades da câmera intactas
-                     senão o utilizarmos precisaremos definir as demais propriedas novamente, fugindo do nosso objeto de criar uma câmera dinâmica
-                  */
-                  setCamera(prevCamera => ({
-                     ...prevCamera,
-                     center: {
-                        latitude: loc.coords.latitude,
-                        longitude: loc.coords.longitude,
-                     }
-                  }));
-               }
+               /*
+                  Setando o estado da câmera a partir do operador spread, pois desejamos manter as demais propriedades da câmera intactas,
+                  senão o utilizarmos o spread precisaremos definir as demais propriedas novamente, 
+                  fugindo do nosso objeto de criar uma câmera dinâmica
+               */
+               setCamera(prevCamera => ({
+                  ...prevCamera,
+                  center: {
+                     latitude: loc.coords.latitude,
+                     longitude: loc.coords.longitude,
+                  }
+               }));
+            }
             );
          } catch (err) {
             console.warn('Algo deu errado...')
@@ -96,12 +98,16 @@ const Map = () => {
       setSelectedDestination(false);
    }
 
+   /* 
+      Setando o estado mapReady para forçar o mapa a realizar um nova renderização
+      utilize apenas se optar por usar os botões nativos do React Native Maps
+   */
    const handleMapReady = useCallback(() => {
       setMapReady(true);
    }, [mapRef, setMapReady]);
 
    /*
-      Obtendo a MapView.camera e copiando seus valores para o estado camera
+      Obtendo MapView.camera e copiando seus valores para o estado camera
       para que possamos manter um câmera dinâmica
    */
    const handleMapCamera = async ({ isGesture }) => {
@@ -115,7 +121,6 @@ const Map = () => {
       }));
       //Se a câmera estiver fixa e for detecado um gesto, significa que o usuário deseja navegar livremente pelo mapa
       if (followUserLocation && isGesture) {
-         console.log('foi gesto')
          setFollowUserLocation(false);
       }
    }
@@ -137,7 +142,7 @@ const Map = () => {
          O método animateCamera() não possui callback, então não sabemos quando a animação de fato terminou 
          por isso utilizaremos um setTimeout setando o estado após 3 segundos
       */
-      setTimeout(()=>{
+      setTimeout(() => {
          setFollowUserLocation(true);
       }, 3000)
    }
@@ -156,12 +161,14 @@ const Map = () => {
             showsUserLocation={true}
             //Escondendo o botão de ir até a localização atual
             showsMyLocationButton={false}
+            //Ativando botões de zoom nativos do mapa
             zoomControlEnabled={true}
             ref={mapRef}
-            //Chamando a função handleMapReady quando o mapa estiver totalmente carregado
+            //Chamando a função handleMapReady será chamada quando o mapa estiver totalmente carregado
             onMapReady={handleMapReady}
+            //Chamando a função handleMapCamera quando a region (câmera) do mapa mudar, seja através de gesto ou de forma automática 
             onRegionChangeComplete={(region, isGesture) => handleMapCamera(isGesture)}
-            /*Se o usuário estiver selecionado um marcador e clicar sobre o mapa quando não houver uma rota definida 
+            /*Se o usuário estiver com um marcador selecionado e tocar no mapa quando não houver uma rota definida 
                o estado que armazena as coordenadas do marcador será limpo */
             onPress={!destinationLocation ? () => setSelectedDestination(null) : null}
          >
@@ -188,6 +195,7 @@ const Map = () => {
             >
             </CustomMarker>
 
+            {/* Calculando rota apenas quando o estado destinationLocation possuir as coordenadas */}
             {destinationLocation ?
                <MapViewDirections
                   origin={
@@ -205,18 +213,20 @@ const Map = () => {
                   /*Define se a MapView.Polilyne deve resetar ou não na hora de calcular a rota, 
                   se as linhas apresentarem bugs sete o valor para false*/
                   resetOnChange={false}
+                  //Definindo uma rota com maior precisão, evitando que a rota mostrada "corte caminho" pelo mapa
+                  precision={'high'}
                   onError={(errorMessage) => {
                      alert('Erro ao obter direções...');
                   }}
-                  //Centralizando os marcadores após definir a rota
+                  //Centralizando a posição atual e o marcador de destino após obter a rota com sucesso
                   onReady={result => {
                      if (shouldFitMarkers) {
                         mapRef.current.fitToCoordinates(result.coordinates, {
                            edgePadding: {
-                              right: (width / 20),
-                              bottom: (height / 20),
-                              left: (width / 20),
-                              top: (height / 20),
+                              right: (width / 10),
+                              bottom: (height / 10),
+                              left: (width / 10),
+                              top: (height / 10),
                            }
                         })
                         setShouldFitMarkers(false)
@@ -243,11 +253,11 @@ const Map = () => {
             }
             {/* Botão obter localização, necessário possuir um marcador selecionado para ser exibido */}
             {selectedDestination ?
-                  <Button
-                     backgroundColor={'#4285F4'}
-                     icon={require('../assets/directions.png')}
-                     onPress={() => getDirections()}
-                  />
+               <Button
+                  backgroundColor={'#4285F4'}
+                  icon={require('../assets/directions.png')}
+                  onPress={() => getDirections()}
+               />
                :
                null
             }

@@ -2,14 +2,15 @@ import React from 'react';
 import { Callout, Marker } from 'react-native-maps';
 import { StyleSheet, View, Text } from 'react-native';
 
-const CustomMarker = (
+function CustomMarker(
   {
     id,
     latitude,
     longitude,
     color,
     onPress,
-  }) => {
+  }) {
+
 
   return (
     <Marker
@@ -22,6 +23,11 @@ const CustomMarker = (
       }}
       //Chamando a funcão para selecionar o marcador
       onPress={() => onPress(latitude, longitude)}
+      /* 
+        Permite que os marcadores personalizados monitorem alterações visuais e sejam redesenhados,
+        para obter maior performance é recomendado deixar a propriedade desativada
+      */
+      tracksViewChanges={false}
     >
       <View style={styles.markerWrapper}>
         {/* Adicionando uma cor personalizada de acordo com as props */}
@@ -104,4 +110,6 @@ const styles = StyleSheet.create({
 
 });
 
-export default CustomMarker;
+/* As props de nosso componente não sofrerão alteração durante o tempo de execução, 
+então utilizaremos o React.memo para evitar renderizações desnecessárias */
+export default CustomMarker = React.memo(CustomMarker);

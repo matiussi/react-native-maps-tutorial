@@ -2,26 +2,26 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 
 const Button = ({
-   backgroundColor='#fff', 
-   width = 50, 
+   backgroundColor = '#fff',
+   width = 50,
    heigth = 50,
    icon,
    onPress
 }) => {
    return (
       <TouchableOpacity
-      //Adicionando um estilo personalizado de acordo com as props
+         //Adicionando um estilo personalizado de acordo com as props
          style={[
-            styles.mapButton, 
+            styles.mapButton,
             {
-               backgroundColor: backgroundColor, 
-               height: heigth, 
-               width: width 
+               backgroundColor: backgroundColor,
+               height: heigth,
+               width: width
             }
          ]}
          onPress={() => onPress()}
       >
-         <Image style={styles.icon} source={icon}> 
+         <Image style={styles.icon} source={icon}>
          </Image>
       </TouchableOpacity>
    );
