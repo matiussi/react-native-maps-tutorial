@@ -40,7 +40,7 @@ const Map = () => {
 
    useEffect(() => {
       const startTracking = async () => {
-         //Obtendo permissões de localização, é necesário que a permissão do usuário seja concedida para que possamos obter sua localização
+         //Obtendo permissões de localização, é necesário que as permissões sejam concedidas para que possamos obter a localização do usuário
          let { status } = await requestForegroundPermissionsAsync();
          if (status !== 'granted') {
             alert('Permissões para acessar a localização foram negadas.');
@@ -58,7 +58,7 @@ const Map = () => {
                /*
                   Setando o estado da câmera a partir do operador spread, pois desejamos manter as demais propriedades da câmera intactas,
                   senão o utilizarmos o spread precisaremos definir as demais propriedas novamente, 
-                  fugindo do nosso objeto de criar uma câmera dinâmica
+                  fugindo do nosso objetivo de criar uma câmera dinâmica
                */
                setCamera(prevCamera => ({
                   ...prevCamera,
@@ -135,7 +135,7 @@ const Map = () => {
             pitch: camera.pitch,
             heading: camera.heading,
             altitude: camera.altitude,
-            zoom: camera.zoom <= 13 ? 17.6 : camera.zoom, //Aproximando a câmera caso ela esteja muito distante
+            zoom: camera.zoom <= 13 ? 17 : camera.zoom, //Aproximando a câmera caso ela esteja muito distante
          }, { duration: 2000 });
       }
       /* 
@@ -163,6 +163,9 @@ const Map = () => {
             showsMyLocationButton={false}
             //Ativando botões de zoom nativos do mapa
             zoomControlEnabled={true}
+            //Habilitando um indicador de carregamento
+            loadingEnabled={true}
+            loadingBackgroundColor={'#fff'}
             ref={mapRef}
             //Chamando a função handleMapReady será chamada quando o mapa estiver totalmente carregado
             onMapReady={handleMapReady}
@@ -229,7 +232,7 @@ const Map = () => {
                               top: (height / 10),
                            }
                         })
-                        setShouldFitMarkers(false)
+                        setShouldFitMarkers(false);
                      }
                   }}
                >
