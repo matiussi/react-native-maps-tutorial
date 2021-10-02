@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-//Importing the Map and Markers components
 import Map from './components/Map'
 
 export default function App() {
