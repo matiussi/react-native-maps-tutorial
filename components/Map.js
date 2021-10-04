@@ -166,6 +166,8 @@ const Map = () => {
             //Habilitando um indicador de carregamento
             loadingEnabled={true}
             loadingBackgroundColor={'#fff'}
+            //Desabilitando botão Navegação e Abrir com Maps, quando um marcador for clicado
+            toolbarEnabled={false}
             ref={mapRef}
             //Chamando a função handleMapReady será chamada quando o mapa estiver totalmente carregado
             onMapReady={handleMapReady}
