@@ -1175,7 +1175,7 @@ Neste projeto vimos como é possível criar uma aplicação utilizando `React Na
 
 Quaisquer dúvidas, sugestões ou críticas, por favor deixe uma mensagem o/.
 
-O código completo da aplicação está disponível no [GitHub](#https://github.com/matiussi/react-native-maps-tutorial)
+O código completo da aplicação está disponível no [GitHub](https://github.com/matiussi/react-native-maps-tutorial)
 
 
 
