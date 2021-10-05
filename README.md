@@ -2,38 +2,38 @@
 
 ## O que iremos ver
 
-- [Visão Geral](#📝-visão-geral) 
-- [Configurando o projeto](#⚙️-configurando-o-projeto)
-  - [Instalando o Expo CLI](#🛠️-instalando-o-expo-cli)
-  - [Instalando as Dependências](#🛠️-instalando-as-dependências)
-  - [Iniciando a aplicação](#🚀-iniciando-a-aplicação)
-- [Exibindo o mapa](#🌎-exibindo-o-mapa)
-- [Adicionando marcadores](#📍-adicionando-marcadores)
-- [Obtendo a posição atual](#🌎-obtendo-a-posição-atual) 
-- [Obtendo direções](#↪️-obtendo-direções)
-- [Melhorando a interação com o mapa](#👩‍💻-melhorando-a-interação-com-o-mapa)
-  - [Principais problemas](#📑-principais-problemas)
-    - [Corrigindo a renderização dos botões](#🔨-corrigindo-a-renderização-dos-botões)
-    - [Centralizando dois marcadores](#🔨-centralizando-dois-marcadores)
-    - [Corrigindo a câmera fixa](#🔨-corrigindo-a-câmera-fixa)
-- [Criando botões personalizados](#📱-criando-botões-personalizados)
-  - [Componente Button.js](#📱-componente-buttonjs)
-    - [Botão centralizar posição atual](#🌎-botão-centralizar-posição-atual)
-    - [Botão obter direções](#↪️-botão-obter-direções)
-    - [Botão remover rota](#❌-botão-remover-rota)
-- [Como obter uma chave API do Google](#🔑-como-obter-uma-chave-api-do-google)
+- [Visão Geral](#memo-visão-geral) 
+- [Configurando o projeto](#gear-configurando-o-projeto)
+  - [Instalando o Expo CLI](#hammer_and_wrench-instalando-o-expo-cli)
+  - [Instalando as Dependências](#hammer_and_wrench-instalando-as-dependências)
+  - [Iniciando a aplicação](#rocket-iniciando-a-aplicação)
+- [Exibindo o mapa](#earth_americas-exibindo-o-mapa)
+- [Adicionando marcadores](#round_pushpin-adicionando-marcadores)
+- [Obtendo a posição atual](#earth_americas-obtendo-a-posição-atual) 
+- [Obtendo direções](#arrow_right_hook-obtendo-direções)
+- [Melhorando a interação com o mapa](#woman_technologist-melhorando-a-interação-com-o-mapa)
+  - [Principais problemas](#bookmark_tabs-principais-problemas)
+    - [Corrigindo a renderização dos botões](#hammer-corrigindo-a-renderização-dos-botões)
+    - [Centralizando dois marcadores](#hammer-centralizando-dois-marcadores)
+    - [Corrigindo a câmera fixa](#hammer-corrigindo-a-câmera-fixa)
+- [Criando botões personalizados](#iphone-criando-botões-personalizados)
+  - [Componente Button.js](#iphone-componente-buttonjs)
+    - [Botão centralizar posição atual](#earth_americas-botão-centralizar-posição-atual)
+    - [Botão obter direções](#arrow_right_hook-botão-obter-direções)
+    - [Botão remover rota](#x-botão-remover-rota)
+- [Como obter uma chave API do Google](#key-como-obter-uma-chave-api-do-google)
 - [Conclusão](#conclusão)
 - [Código da aplicação](https://github.com/matiussi/react-native-maps-tutorial)
 
-## 📝 Visão Geral
+## :memo: Visão Geral
 
 Este tutorial possui como objetivo criar um mapa interativo que permita uma navegação agradável ao usuário, utilizando os componentes [React Native Maps](https://github.com/react-native-maps/react-native-maps), [React Native Maps Directions](https://github.com/bramus/react-native-maps-directions) e [Expo Location API](https://docs.expo.dev/versions/latest/sdk/location) como base para nosso projeto.
  
 Inicialmente aprenderemos a exibir um mapa e adicionar marcadores utilizando o componente [React Native Maps](https://github.com/react-native-maps/react-native-maps). Em seguida utilizaremos a [Expo Location API](https://docs.expo.dev/versions/latest/sdk/location) para monitorarmos a localização atual do usuário, com a localização em mãos aprenderemos a criar rotas utilizando o [React Native Maps Directions](https://github.com/bramus/react-native-maps-directions). Para finalizar será apresentada uma solução para realizar o controle da câmera e serão realizadas melhorias na usabilidade da aplicação.
 
-## ⚙️ Configurando o projeto
+## :gear: Configurando o projeto
 
-### 🛠️ Instalando o Expo CLI
+### :hammer_and_wrench: Instalando o Expo CLI
 
 Com o intuito de facilitar o desenvolvimento utilizaremos o [Expo CLI](#https://docs.expo.dev/workflow/expo-cli/), Expo CLI é um aplicativo de linha de comando que é a principal interface entre o desenvolvedor e o [Expo Tools](#https://expo.dev/tools). Você o usará para uma variedade de tarefas, como: Criar novos projetos. Desenvolvendo seu aplicativo: executando o servidor de projeto, visualizando logs, abrindo seu aplicativo em um simulador. 
 Para instalar o Expo CLI utilize o comandos comandos abaixo:
@@ -56,7 +56,7 @@ expo init react-native-maps-tutorial
 cd react-native-maps-tutorial
 ```
 
-### 🛠️ Instalando as dependências
+### :hammer_and_wrench: Instalando as dependências
 
 Antes de iniciarmos de fato a programar nossa aplicação precisaremos instalar as seguintes dependências: 
 - `expo-location`: API responsável por obter as informações de geolocalização
@@ -71,7 +71,7 @@ ou
 yarn add -react-native-maps-directions
 ```
 
-### 🚀 Iniciando a aplicação
+### :rocket: Iniciando a aplicação
 
 Com as dependências instaladas podemos iniciar nossa aplicação a partir do comando:
 
@@ -106,7 +106,7 @@ Após alguns instantes a seguinte tela será apresentada, indicando que nosso ap
    Tela inicial React Native
 </p>
 
-## 🌎 Exibindo o mapa
+## :earth_americas: Exibindo o mapa
 
 Neste projeto iremos separar o mapa e os marcadores em diferentes componentes, mas sinta-se a vontade para fazer da maneira que mais lhe agrada.
 Criaremos uma pasta chamada components, e dentro dela vamos criar os arquivos `Map.js` e `CustomMarker.js`
@@ -201,7 +201,7 @@ Voilà, nosso primeiro mapa foi criado com sucesso! **Algumas vezes as mudanças
 </p>
 
 
-## 📍 Adicionando marcadores
+## :round_pushpin: Adicionando marcadores
 
 Com nosso mapa em funcionamento chegou a hora de adicionarmos um marcador sobre ele, vamos acessar o arquivo `CustomMarker.js`, dentro dele importaremos um `Marker` a partir do `react-native-maps`, queremos que cada marcador seja único e possua uma posição distinta, ou estilo se for necessário, portanto nosso marcador receberá um id, uma latitude, uma longitude e uma cor via props. 
 Um `<Marker>` permite que sejam adicionadas diferentes tags em seu corpo, neste exemplo criaremos um marcador utilizando `Views` e também adicionaremos um `Callout` que exibirá uma janela personalizada quando clicarmos em um marcador. *Nesse exemplo decidi criar um marcador do zero apenas para fins demonstrativos*, vale ressaltar que um marcador pode possuir texto, ícones/imagens, etc... O limite é sua criatividade :D.
@@ -357,7 +357,7 @@ ___
 </p>
 
 
-## 🌎 Obtendo a posição atual
+## :earth_americas: Obtendo a posição atual
 
 Agora que já sabemos como criar um mapa e adicionar um marcador vamos partir para um exemplo mais interessante, ao invés de utilizarmos uma localização fixa como foi definido anteriormente, iremos inicializar o mapa de acordo com a localização atual do usuário, a partir do método `watchPositionAsync()` da `Expo Location API`
 
@@ -527,7 +527,7 @@ ___
 </p>
 
 
-## ↪️ Obtendo direções
+## :arrow_right_hook: Obtendo direções
 
 Para que possamos obter as direções e criar nossas rotas é fundamental possuir uma chave API do Google Maps, ao final do tutorial dediquei uma seção  ensinando a [obter uma chave API](#🔑-como-obter-uma-chave-api-do-google).
 
@@ -775,9 +775,9 @@ Após clicarmos em determinado marcador iremos obter uma rota conforme a imagem 
    Rota entre dois marcadores
 </p>
 
-## 👩‍💻 Melhorando a interação com o mapa
+## :woman_technologist: Melhorando a interação com o mapa
 
-### 📑 Principais problemas
+### :bookmark_tabs: Principais problemas
 
 Com as funcionalidades básicas de nossa aplicação já implementadas, chegou a hora de melhorar a experiência do usuário ao utilizar o mapa, em alguns casos os botões nativos do `react-native-maps` simplesmente não aparecem, como podem ter notado pela imagem acima onde os botões de controle de zoom deveriam estar visíveis, para contornar o problema podemos forçar o mapa a realizar uma nova renderização ou criar nossos próprios botões de zoom.
 
@@ -786,7 +786,7 @@ Também temos um problema relacionado as rotas, sempre que uma rota é definida 
 Quando tentamos navegar pelo mapa a câmera volta bruscamente para a posição atual do usuário após alguns instantes, não provendo liberdade alguma para explorar o mapa. De forma a evitar que isso ocorra vamos implementar uma função para remover a câmera fixa caso seja identificado um gesto no mapa, mais adiante criaremos o [Botão centralizar posição atual](#botão-centralizar-posição-atual) que irá fixar a câmera na posição atual do usuário e segui-lo.
 
 
-#### 🔨 Corrigindo a renderização dos botões
+### :hammer: Corrigindo a renderização dos botões
 
 Para resolver os problemas citados acima será necessário utilizarmos o hook `useRef`, que será responsável por armazenar uma referência do componente `<MapView>`, com isso poderemos acessar suas propriedades e métodos.
 
@@ -832,7 +832,7 @@ Prontinho, agora nosso botão de zoom está sendo exibido normalmente
    Mapa com botões nativos corrigidos
 </p>
 
-#### 🔨 Centralizando dois marcadores
+### :hammer: Centralizando dois marcadores
 
 O próximo passo será centralizar duas coordenadas (posição atual e destino) após a rota inicial ser gerada, primeiro criaremos um estado `shouldFitMarkers` que será responsável por controlar quando os marcadores deverão ser centralizados na tela, também importaremos as `Dimensions` do React Native para que possamos obter a largura e altura da tela, que serão usadas para calcular um espaçamento entre as bordas da tela.
 
@@ -873,7 +873,7 @@ const getDirections = (latitude, longitude) => {
 ```
 
 
-#### 🔨 Corrigindo a câmera fixa
+### :hammer: Corrigindo a câmera fixa
 
 Chegamos em umas das etapas cruciais de nosso projeto, que diz respeito ao controle da câmera por parte do usuário, por enquanto não é possível navegar livremente pelo mapa enquanto nossa posição muda, pois se a posição do mapa for alterada via gesto o mapa centralizará novamente em nossa posição atual após alguns instantes, pois não estamos realizando controle algum, apenas definindo que o `MapView.camera` possui o valor da posição atual obtida através do `watchPositionAsync()`.
 
@@ -917,11 +917,11 @@ const handleMapCamera = async ({ isGesture }) => {
 </MapView>
 ```
 
-## 📱 Criando botões personalizados
+## :iphone: Criando botões personalizados
 
 Anteriormente vimos uma abordagem para controlar câmera livremente, entretanto não definimos como fixá-la e seguir o usuário, também não criamos nenhuma maneira de remover uma rota definida. Para tornar a navegação por parte do usuário mais interessante criaremos um botão para centralizar a posição e fixar a câmera, um botão para obter rotas quando um marcador estiver selecionado, e por fim um botão para remover uma rota definida.
 
-### 📱 Componente Button.js
+### :iphone: Componente Button.js
 
 Vamos criar um novo componente chamado `Button.js` que será responsável por gerar um botão de acordo com as propriedades fornecidas, como tamanho, cor, ícone e a função que ele chamará, queremos que cada botão seja único, mas ao mesmo tempo compartilhem algumas propriedades de estilo entre si.
 
@@ -983,7 +983,7 @@ export default Button;
 
 Agora vamos ao nosso `Map.js`, dentro de nosso `React.Fragment` (`<></>`) e abaixo de nosso `<MapView>` criaremos uma `<View style={styles.buttonWrapper}>` para envolver todos os nosso botões. 
 
-#### 🌎 Botão centralizar posição atual
+#### :earth_americas: Botão centralizar posição atual
 
 Nosso primeiro botão será o botão `centralizar posição atual`, criaremos a função `handleFollowUserLocation()` que será invocada pelo botão, a função irá realizar uma animação até a posição atual do usuário, após terminada a animação definiremos o estado `followUserLocation` como verdadeiro, a partir deste momento nossa `MapView.camera` passará a seguir o usuário.
 
@@ -1029,7 +1029,7 @@ const handleFollowUserLocation = () => {
 </>;
 ```
 
-#### ↪️ Botão obter direções
+#### :arrow_right_hook: Botão obter direções
 
 Ao invés de obtermos as direções clicando em um marcador vamos partir para uma abordagem mais interessante, quando o usuário clicar sobre um marcador, o marcador será selecionado e o botão `obter direções` será exibido, caso o usuário deseje traçar uma rota até o marcador ele precisará clicar no botão.
 
@@ -1076,7 +1076,7 @@ const getDirections = () => {
 ...
 ```
 
-#### ❌ Botão remover rota
+#### :x: Botão remover rota
 
 Para finalizar criaremos o botão `remover rotas`, mas antes vamos adicionar a propriedade `onPress()` em nosso `<MapView>` para que ao tocar no mapa será removida a seleção de um marcador caso não esteja nenhuma rota definida, agora podemos criar nosso botão `remover rota` que invocará a função `removeDirections()`, a função basicamente limpará os estados `selectedDestination` e `destinationLocation`.
 
@@ -1119,7 +1119,7 @@ Após adicionarmos todos os botões o resultado final pode ser conferido abaixo
    Demonstrando o funcionamento dos botões personalizados
 </p>
 
-## 🔑 Como obter uma chave API do Google
+## :key: Como obter uma chave API do Google
 
 Com sua conta do Google logada acesse o [Google Cloud Console](#https://console.cloud.google.com), em seguida clique na opção **Selecione um Projeto** -> **Novo Projeto**
 <p align="center">
