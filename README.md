@@ -520,7 +520,7 @@ export default Map;
 ___
 <br>
 <p align="center">
-   <img alt="Tela inicial" src="https://i.imgur.com/Im5UZYT.gif" width="540" height="960" />
+   <img alt="Câmera seguindo a posição atual do usuário" src="https://i.imgur.com/jnIWtjh.gif"/>
 </p>
 <p align="center">
 	Câmera seguindo a posição atual do usuário
@@ -1113,10 +1113,10 @@ const removeDirections = () => {
 Após adicionarmos todos os botões o resultado final pode ser conferido abaixo
 
 <p align="center">
-   <img alt="Demonstrando o funcionamento dos botões personalizados" src="https://i.imgur.com/a3nTCBB.gif" width="540" height="960" />
+   <img alt="Resultado final do projeto" src="https://i.imgur.com/n5xeONv.gif"/>
 </p>
 <p align="center">
-   Demonstrando o funcionamento dos botões personalizados
+   Resultado final do projeto
 </p>
 
 ## :key: Como obter uma chave API do Google
