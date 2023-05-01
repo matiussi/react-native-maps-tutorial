@@ -1,4 +1,4 @@
-# Como utilizar React Native Maps com Expo
+# Como utilizar React Native Maps com Expo (Desatualizado)
 
 ## O que iremos ver
 
